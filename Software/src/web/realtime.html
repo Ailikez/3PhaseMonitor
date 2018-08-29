@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script type = "text/javascript">
+			function start() {
+				var ws = new WebSocket("ws://" + window.location.hostname + ":81");
+				ws.binaryType = 'arraybuffer';
+				ws.onmessage = function (evt) {
+					arr = new Int32Array(evt.data);
+					document.getElementById("total").innerHTML = (4*arr[0]/256).toFixed(2);
+					document.getElementById("A").innerHTML = (arr[1]/256).toFixed(2);
+					document.getElementById("B").innerHTML = (arr[2]/256).toFixed(2);
+					document.getElementById("C").innerHTML = (arr[3]/256).toFixed(2);
+				};
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<p> Total  : <span id="total">?</span> W</p>
+		<p> Phase A: <span id="A">?</span> W</p>
+		<p> Phase B: <span id="B">?</span> W</p>
+		<p> Phase C: <span id="C">?</span> W</p>
+	</body>
+</html>
